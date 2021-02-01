@@ -1,36 +1,37 @@
 <template>
-  <h1>Characters</h1>
+  <div class="center">
+    <input
+      type="text"
+      placeholder="Filter by name..."
+      @input="e => handleFilter(e.target.value)"
+    />
+  </div>
   <p v-if="fetching">Loading...</p>
   <p v-else-if="error">An error occurred</p>
   <div class="grid" v-else>
     <b-card
       :key="key"
-      v-for="(character, key) in characters"
+      v-for="(character, key) in filteredCharacters"
       :title="character.name"
+      :subtitle="character.status"
       :data="[
         {
-          text: 'Status: ',
-          info: character.status
-        },
-        {
-          text: 'Species: ',
+          text: character.species && 'Species: ',
           info: character.species
         },
         {
-          text: 'Origin: ',
+          text: character.origin && 'Origin: ',
           info: character.origin
         },
         {
-          text: 'Gender: ',
+          text: character.gender && 'Gender: ',
           info: character.gender
-        },
-        {
-          text: 'Hair color: ',
-          info: character.status
         }
       ]"
       :img="character.img_url"
+      roundImageOnSmallScreen
     />
+    <p v-if="filteredCharacters.length <= 0">No results matching filter</p>
   </div>
 </template>
 
@@ -44,6 +45,7 @@ export default {
   setup() {
     const state = reactive({
       characters: [],
+      filteredCharacters: [],
       fetching: false,
       error: false
     });
@@ -52,6 +54,7 @@ export default {
       getAllCharacters()
         .then(res => {
           state.characters = res;
+          state.filteredCharacters = res;
         })
         .catch(() => {
           state.error = true;
@@ -61,7 +64,14 @@ export default {
         });
     });
 
-    return { ...toRefs(state) };
+    const handleFilter = value => {
+      const tmp = state.characters.filter(result =>
+        result.name.toLowerCase().includes(value.toLowerCase())
+      );
+      state.filteredCharacters = tmp;
+    };
+
+    return { ...toRefs(state), handleFilter };
   }
 };
 </script>
@@ -69,18 +79,35 @@ export default {
 <style lang="scss" scoped>
 .grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
+}
+
+.center {
+  text-align: center;
+
+  & input {
+    padding: 0.5em;
+    margin: 0 1em 1.5em 1em;
+    width: 330px;
+    outline: none;
+    background-color: #d3e9ff;
+    border: none;
+  }
 }
 
 @media only screen and (max-width: 1400px) {
   .grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+    justify-items: center;
   }
 }
-@media only screen and (max-width: 900px) {
-  .grid {
-    grid-template-columns: 1fr;
+
+@media only screen and (max-width: 400px) {
+  .center {
+    & input {
+      width: 200px;
+    }
   }
 }
 </style>
