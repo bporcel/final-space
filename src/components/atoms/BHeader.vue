@@ -13,13 +13,12 @@ export default {
 
 <style lang="scss" scoped>
 header {
-  background-color: #2c3e50;
+  background-color: #191f25;
   position: fixed;
   top: 0;
   right: 0;
   left: 0;
   padding: 1em 0 1em 0;
-  border-bottom: solid 2px #191f25;
   // display: grid;
   // grid-template-columns: 1fr 1fr;
   // grid-template-rows: auto;
