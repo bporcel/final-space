@@ -72,4 +72,15 @@ export default {
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
 }
+
+@media only screen and (max-width: 1400px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
 </style>
