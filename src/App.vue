@@ -19,23 +19,52 @@
   <router-view />
   <button class="up" @click="handleScroll">GO UP</button>
   <div class="separator" />
+  <transition name="fade" mode="out-in">
+    <b-pop-up v-if="showPopUp" :handleClick="handleClickClosePopup" />
+  </transition>
 </template>
 
 <script>
+import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import BHeader from "./components/atoms/BHeader";
+import BPopUp from "./components/atoms/BPopUp.vue";
 export default {
   name: "App",
-  components: { BHeader },
+  components: { BHeader, BPopUp },
   setup() {
     const route = useRoute();
+    const showPopUp = ref(false);
+
+    const handleClickClosePopup = () => {
+      showPopUp.value = false;
+    };
+
     const handleScroll = () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     };
-    return { route, handleScroll };
+
+    onMounted(() => {
+      window.setTimeout(() => {
+        showPopUp.value = true;
+      }, 20000);
+    });
+
+    return { route, handleScroll, handleClickClosePopup, showPopUp };
   }
 };
 </script>
+
+<style scoped>
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 700ms;
+}
+</style>
 
 <style lang="scss">
 body {
