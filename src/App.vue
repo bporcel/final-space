@@ -17,6 +17,7 @@
     </router-link>
   </h1>
   <router-view />
+  <button class="up" @click="handleScroll">GO UP</button>
   <div class="separator" />
 </template>
 
@@ -28,7 +29,10 @@ export default {
   components: { BHeader },
   setup() {
     const route = useRoute();
-    return { route };
+    const handleScroll = () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+    return { route, handleScroll };
   }
 };
 </script>
@@ -45,6 +49,25 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #ffffff;
+}
+
+.up {
+  color: $lightBlue;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: $red;
+  border: none;
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  padding-top: 0.4em;
+  outline: none;
+  cursor: pointer;
+  position: absolute;
+  left: 50%;
+  margin-top: 2em;
+  -webkit-transform: translate(-50%);
+  transform: translate(-50%);
 }
 
 .separator {
