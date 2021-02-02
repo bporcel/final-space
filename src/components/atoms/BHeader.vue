@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>Final Space</h1>
+    <h1>FINAL SPACE</h1>
   </header>
 </template>
 
@@ -12,8 +12,7 @@ export default {
 
 <style lang="scss" scoped>
 header {
-  background-color: #191f25;
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   left: 0;
@@ -21,7 +20,7 @@ header {
 
   text-align: center;
   & h1 {
-    font-size: 3em;
+    font-size: 4em;
     margin: 0;
     padding-bottom: 0.1em;
   }

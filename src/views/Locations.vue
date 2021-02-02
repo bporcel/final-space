@@ -60,6 +60,7 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
+  grid-gap: 1em;
 }
 
 @media only screen and (max-width: 1400px) {

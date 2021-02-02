@@ -21,7 +21,7 @@
         >
           {{ subtitle }}
         </p>
-        <p :key="key" v-for="(detail, key) in data">
+        <p class="info" :key="key" v-for="(detail, key) in data">
           <span
             ><strong>{{ detail.text }}</strong></span
           >
@@ -60,9 +60,8 @@ export default {
 
 <style lang="scss" scoped>
 .card {
-  background-color: #2c3e50;
-  color: #ffffff;
-  margin: 0.5em 1em 0.5em 0;
+  background-color: $darkBlue;
+  color: $white;
   padding-right: 2em;
   border-radius: 0.1em;
 
@@ -76,15 +75,15 @@ export default {
     margin-top: 0;
 
     &.alive {
-      color: #58e78f;
+      color: $green;
     }
 
     &.dead {
-      color: #cf3232;
+      color: $red;
     }
 
     &.unknown {
-      color: #a3a3a3;
+      color: $gray;
     }
 
     &::before {

@@ -31,8 +31,10 @@
       :img="character.img_url"
       roundImageOnSmallScreen
     />
-    <p v-if="filteredCharacters.length <= 0">No results matching filter</p>
   </div>
+  <p class="no-results" v-if="filteredCharacters.length <= 0">
+    No results matching filter
+  </p>
 </template>
 
 <script>
@@ -81,6 +83,11 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
+  grid-gap: 1em;
+}
+
+.no-results {
+  text-align: center;
 }
 
 .center {
@@ -91,7 +98,7 @@ export default {
     margin: 0 1em 1.5em 1em;
     width: 330px;
     outline: none;
-    background-color: #d3e9ff;
+    background-color: $lightBlue;
     border: none;
   }
 }
